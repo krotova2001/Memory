@@ -34,11 +34,18 @@ int main()
 {
 	srand(time(0));
 	setlocale(LC_ALL, "Russian");
-	const int size_x = 10;
-	const int size_y = 10;
-	int arr[size_x][size_y];
+	const int size_x;
+	const int size_y;
+	
 	cout << "Ну здавствуй, мой юный друг!\nТы попал в увлекательный мир программирования!\nДавай сиграем в игру Память\n ";
 	cout << "\n";
+	cout << "Введи количество строк поля\n";
+	cin >> size_x;
+	cout << "Введи количество столбцов поля\n";
+	cin >> size_y;
+
+
+	int arr[size_x][size_y];
 	New_arr(arr, size_x, size_y);
 	Show_arr(arr, size_x, size_y);
 }
