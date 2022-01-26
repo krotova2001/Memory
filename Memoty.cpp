@@ -34,8 +34,8 @@ int main()
 {
 	srand(time(0));
 	setlocale(LC_ALL, "Russian");
-	const int size_x;
-	const int size_y;
+	int size_x;
+	int size_y;
 	
 	cout << "Ну здавствуй, мой юный друг!\nТы попал в увлекательный мир программирования!\nДавай сиграем в игру Память\n ";
 	cout << "\n";
@@ -43,9 +43,11 @@ int main()
 	cin >> size_x;
 	cout << "Введи количество столбцов поля\n";
 	cin >> size_y;
+	int** arr = new int*[size_x];
+	for (int i = 0; i < size_x; i++) {
+		arr[i] = new int[i + 1];
+	}
 
-
-	int arr[size_x][size_y];
 	New_arr(arr, size_x, size_y);
 	Show_arr(arr, size_x, size_y);
 }
