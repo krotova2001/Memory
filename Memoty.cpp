@@ -4,18 +4,33 @@ using namespace std;
 
 
 
-void New_arr (int arr[][10], int size_x = 10, int size_y = 10) //функция создания нового поля. Принимает массив и его размеры
+void New_arr (int **arr, int size_x = 10, int size_y = 10) //функция создания нового поля. Принимает массив и его размеры
 {
 	
-	for (int i = 0; i < size_x; i++) {
-		for (int j = 0; j < size_y/2; j++) {
+	for (int i = 0; i < size_x; i++) 
+	{
+		for (int j = 0; j < size_y/2; j++) 
+		{
 			arr[i][j] = rand()%30; //половину строки заполняем случайным значением
 			arr[i][j + size_y / 2] = arr[i][j]; // вторую половину строки заполняем таким же парным значением
 		}
 	}
+	//после парного заполнения нужно перемешать все значения во всем массиве
+	for (int i = 0; i < size_x; i++)
+	{
+		for (int j = 0; j < size_y; j++)
+		{
+			int x_rand = rand() % size_x;
+			int y_rand = rand() % size_y;
+			int temp = arr[i][j];
+			arr[i][j] = arr[x_rand][y_rand];
+			arr[x_rand][y_rand] = temp;
+		}
+	}
+
 }
 
-void Show_arr(int arr[][10], int size_x, int size_y) //функция вывода ответов на экран
+void Show_arr(int **arr, int size_x, int size_y) //функция вывода ответов на экран
 {
 	for (int i = 0; i < size_x; i++) 
 	{
@@ -45,7 +60,7 @@ int main()
 	cin >> size_y;
 	int** arr = new int*[size_x];
 	for (int i = 0; i < size_x; i++) {
-		arr[i] = new int[i + 1];
+		arr[i] = new int[size_y];
 	}
 
 	New_arr(arr, size_x, size_y);
