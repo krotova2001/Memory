@@ -2,8 +2,6 @@
 #include <ctime>
 using namespace std;
 
-
-
 void New_arr (int **arr, int size_x = 10, int size_y = 10) //функция создания нового поля. Принимает массив и его размеры
 {
 	for (int i = 0; i < size_x; i++) 
@@ -28,7 +26,7 @@ void New_arr (int **arr, int size_x = 10, int size_y = 10) //функция со
 	}
 }
 
-void Show_arr(int **arr, int size_x, int size_y) //функция вывода ответов (массива) на экран
+template <typename T> void Show_arr(T **arr, int size_x, int size_y) //функция вывода ответов (массива) на экран
 {
 	for (int i = 0; i < size_x; i++) 
 	{
@@ -69,14 +67,37 @@ int main()
 	}
 	New_arr(arr, size_x, size_y); // и заполним его значениями, которые нужно отгадывать
 
-	//Show_arr(arr, size_x, size_y);
-
-	char** arr_mask = new char* [size_x];
+	//создадим маску - пустое поле
+	int** arr_mask = new int* [size_x];
 	for (int i = 0; i < size_x; i++) {
-		arr_mask[i] = new char[size_y];
+		arr_mask[i] = new int[size_y]{0};
 	}
-	
 
+	int n = 1;
+	for (int i = 0; i < size_x; i++)
+	{
+		for (int j = 0; j < size_y; j++)
+		{
+			arr_mask[i][j] = n; //половину строки заполняем случайным значением
+			n++;
+		}
+	}
+	Show_arr(arr, size_x, size_y);
+	cout << "\n";
+	Show_arr(arr_mask, size_x, size_y);
+	
+	int answer1;
+	int answer2; //хранение ответов пользователя
+	cout << "Ну что ж, посмотрим, насколько ты сообразительный...\n";
+	
+	cout << "Введи номер ячейки\n";
+	cin >> answer1;
+	
+	cout << "Введи номер второй ячейки\n";
+	cin >> answer2;
+
+	*(arr_mask+answer2-1) = *(arr+answer2-1), *(arr_mask + answer1-1) = *(arr + answer1-1);
+	Show_arr(arr_mask, size_x, size_y);
 }
 
 
