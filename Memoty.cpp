@@ -49,7 +49,8 @@ int main()
 	setlocale(LC_ALL, "Russian");
 	int size_x; //размер массива по вертикали
 	int size_y; //размер по горизонтали
-	
+	char mask = '*';
+
 	cout << "Ну здавствуй, мой юный друг!\nТы попал в увлекательный мир программирования!\nДавай сиграем в игру Память\n ";
 	cout << "\n";
 	cout << "Введи количество строк поля (четное число)\n";
@@ -61,13 +62,21 @@ int main()
 	if (size_x % 2 != 0) size_x++;
 	if (size_y % 2 != 0) size_y++;
 
+	//теперь создадим нужное поле
 	int** arr = new int*[size_x];
 	for (int i = 0; i < size_x; i++) {
 		arr[i] = new int[size_y];
 	}
+	New_arr(arr, size_x, size_y); // и заполним его значениями, которые нужно отгадывать
 
-	New_arr(arr, size_x, size_y);
-	Show_arr(arr, size_x, size_y);
+	//Show_arr(arr, size_x, size_y);
+
+	char** arr_mask = new char* [size_x];
+	for (int i = 0; i < size_x; i++) {
+		arr_mask[i] = new char[size_y];
+	}
+	
+
 }
 
 
