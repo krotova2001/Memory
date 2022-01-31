@@ -2,41 +2,35 @@
 #include <ctime>
 using namespace std;
 
-void New_arr (int **arr, int size_x = 10, int size_y = 10) //функция создания нового поля. Принимает массив и его размеры
+void New_arr (int *arr, int size_x = 10) //функция создания нового поля. Принимает массив и его размер
 {
-	for (int i = 0; i < size_x; i++) 
-	{
-		for (int j = 0; j < size_y/2; j++) 
+	int size = size_x * size_x;
+		for (int i = 0; i < size / 2; i++)// заполняем одномернный массив по строкам
 		{
-			arr[i][j] = rand()%30; //половину строки заполняем случайным значением
-			arr[i][j + size_y / 2] = arr[i][j]; // вторую половину строки заполняем таким же парным значением
+			arr[i] = rand() % 30; //половину  заполняем случайным значением
+			arr[i+size/2] = arr[i]; // вторую половину заполняем таким же парным значением
 		}
-	}
 	//после парного заполнения нужно перемешать все значения во всем массиве
-	for (int i = 0; i < size_x; i++)
+	for (int i = 0; i < size; i++)
 	{
-		for (int j = 0; j < size_y; j++)
-		{
-			int x_rand = rand() % size_x;
-			int y_rand = rand() % size_y; // создаем два случайных значения - случайный элемент массива
-			int temp = arr[i][j];
-			arr[i][j] = arr[x_rand][y_rand]; //помещаем текущий элемент в случайный
-			arr[x_rand][y_rand] = temp;
-		}
+			int x_rand = rand() % size; // случайный и индекс массива в пределах его размера
+			int temp = arr[i];
+			arr[i] = arr[x_rand]; //помещаем текущий элемент в случайный
+			arr[x_rand] = temp;
 	}
 }
 
-template <typename T> void Show_arr(T **arr, int size_x, int size_y) //функция вывода ответов (массива) на экран
+template <typename T> void Show_arr(T arr, int size) //функция вывода ответов (массива) на экран
 {
-	for (int i = 0; i < size_x; i++) 
+	for (int i = 0; i < size; i++) 
 	{
-		for (int j = 0; j < size_y; j++)
+		for (int j = 0; j < size; j++)
 		{
-			printf("%3d", arr[i][j]);
+			printf("%3d", arr[i+j]);
 			cout << "|";
 		}
 		cout << "\n";
-		for (int k = 0; k < size_y; k++) { cout << "----"; }
+		for (int k = 0; k < size; k++) { cout << "----"; } // рисуем подобие поля
 		cout << "\n";
 	}
 }
@@ -45,34 +39,27 @@ int main()
 {
 	srand(time(0)); 
 	setlocale(LC_ALL, "Russian");
-	int size_x; //размер массива по вертикали
-	int size_y; //размер по горизонтали
+	int size_x; //размер поля
 	char mask = '*';
 
 	cout << "Ну здавствуй, мой юный друг!\nТы попал в увлекательный мир программирования!\nДавай сиграем в игру Память\n ";
 	cout << "\n";
-	cout << "Введи количество строк поля (четное число)\n";
+	cout << "Введи размер поля (четное число)\n";
 	cin >> size_x;
-	cout << "Введи количество столбцов поля (четной число)\n";
-	cin >> size_y;
-	//необходимо, чтобы матрица была с четным количество элементов, так как загадываем парные значения
+	//необходимо, чтобы длина поля было с четным количество элементов, так как загадываем парные значения
 	//проверим данные пользователя на соответствие этому. Если это не так - исправим
 	if (size_x % 2 != 0) size_x++;
-	if (size_y % 2 != 0) size_y++;
 
 	//теперь создадим нужное поле
-	int** arr = new int*[size_x];
-	for (int i = 0; i < size_x; i++) {
-		arr[i] = new int[size_y];
-	}
-	New_arr(arr, size_x, size_y); // и заполним его значениями, которые нужно отгадывать
-
+	int* arr = new int[size_x*size_x];
+	New_arr(arr, size_x); // и заполним его значениями, которые нужно отгадывать
+	Show_arr(arr, size_x);
+	
+	
 	//создадим маску - пустое поле
-	int** arr_mask = new int* [size_x];
-	for (int i = 0; i < size_x; i++) {
-		arr_mask[i] = new int[size_y]{0};
-	}
-
+	//int* arr_mask = new int [size_x];
+	
+	/*
 	int n = 1;
 	for (int i = 0; i < size_x; i++)
 	{
@@ -97,7 +84,7 @@ int main()
 	cin >> answer2;
 
 	*(arr_mask+answer2-1) = *(arr+answer2-1), *(arr_mask + answer1-1) = *(arr + answer1-1);
-	Show_arr(arr_mask, size_x, size_y);
+	*/
 }
 
 
