@@ -1,5 +1,7 @@
 #include <iostream>
 #include <ctime>
+#include <windows.h>
+
 using namespace std;
 
 template <typename T> void New_arr (T *arr, int size_x = 10) //функция создания нового поля. Принимает массив и его размер
@@ -105,7 +107,7 @@ int main()
 	//Show_arr(arr, size_x);
 	cout << "\n";
 	
-	
+	int step = 0; // количество шагов до выйгрыша
 	int answer1;
 	int answer2; //хранение ответов пользователя
 	cout << "Ну что ж, посмотрим, насколько ты сообразительный...\n";
@@ -123,24 +125,26 @@ int main()
 		cout << "Найди ей пару\n";
 		cin >> answer2;
 		answer2--;// уменьшим значения чтоб оно совпало с индексом массива
+		step++;
 		
-		
-
 		if (arr[answer1] == arr[answer2]) // если совпало - открываем карту
 		{
 			arr_mask[answer1] = arr[answer1];
 			arr_mask[answer2] = arr[answer2];
+			Beep(5523, 50);
+			Beep(5523, 50);
 			Show_arr(arr_mask, size_x);
 		}
 		
 		else //если не сопало - позазываем то, что угаданно до этого
 		{
+			Beep(523, 500);
 			system("cls"); //очистим экран
 			Show_element(arr, arr_mask, size_x, answer2);
 			system("pause");
 		}
 	}
-	cout << "Вы выйграли";
+	cout << "Вы выйграли за " << step << " шагов\n";
 }
 
 
