@@ -139,7 +139,6 @@ int main()
 			Show_element(arr, arr_mask, size_x, answer2);
 			system("pause");
 		}
-
 	}
 	cout << "Вы выйграли";
 }
