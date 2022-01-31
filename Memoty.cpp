@@ -35,6 +35,7 @@ template <typename T> void Show_arr(T arr, int size) //функция вывод
 		cout << "\n";
 	}
 }
+//bool win(){}
 
 int main()
 {
@@ -63,22 +64,28 @@ int main()
 		n++;
 	}
 
-	Show_arr(arr, size_x);
+	//Show_arr(arr, size_x);
 	cout << "\n";
 	Show_arr(arr_mask, size_x);
-	/*
+	
 	int answer1;
 	int answer2; //хранение ответов пользователя
 	cout << "Ну что ж, посмотрим, насколько ты сообразительный...\n";
 	
-	cout << "Введи номер ячейки\n";
-	cin >> answer1;
-	
-	cout << "Введи номер второй ячейки\n";
-	cin >> answer2;
+	while (true) 
+	{
+		cout << "Введи номер ячейки\n";
+		cin >> answer1;
+		cout << "Введи номер парной ячейки\n";
+		cin >> answer2;
 
-	*(arr_mask+answer2-1) = *(arr+answer2-1), *(arr_mask + answer1-1) = *(arr + answer1-1);
-	*/
+		if (arr[answer1] == arr[answer2]) 
+		{
+			arr_mask[answer1] = arr[answer1];
+			arr_mask[answer2] = arr[answer2];
+			Show_arr(arr_mask, size_x);
+		}
+	}
 }
 
 
