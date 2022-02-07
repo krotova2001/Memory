@@ -131,8 +131,8 @@ int main()
 		{
 			arr_mask[answer1] = arr[answer1];
 			arr_mask[answer2] = arr[answer2];
-			Beep(5523, 50);
-			Beep(5523, 50);
+			Beep(5523, 400);
+			Beep(5523, 400);
 			Show_arr(arr_mask, size_x);
 		}
 		
